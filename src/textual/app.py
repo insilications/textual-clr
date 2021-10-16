@@ -2,6 +2,7 @@ from __future__ import annotations
 import os
 
 import asyncio
+import uvloop
 from functools import partial
 from typing import Any, Callable, ClassVar, Type, TypeVar
 import warnings
@@ -40,12 +41,7 @@ LayoutDefinition = "dict[str, Any]"
 
 ViewType = TypeVar("ViewType", bound=View)
 
-try:
-    import uvloop
-except ImportError:
-    pass
-else:
-    uvloop.install()
+uvloop.install()
 
 
 class ActionError(Exception):
@@ -185,7 +181,11 @@ class App(MessagePump):
             app = cls(console=console, screen=screen, driver_class=driver, **kwargs)
             await app.process_messages()
 
-        asyncio.run(run_app())
+        loop = asyncio.get_event_loop()
+        try:
+            asyncio.run(run_app())
+        finally:
+            loop.close()
 
     async def push_view(self, view: ViewType) -> ViewType:
         self.register(view, self)
