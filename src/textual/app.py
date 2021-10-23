@@ -323,6 +323,7 @@ class App(MessagePump):
         driver = self._driver
         assert driver is not None
         driver.disable_input()
+        driver.flush_io()
         await self.close_messages()
 
     def refresh(self, repaint: bool = True, layout: bool = False) -> None:

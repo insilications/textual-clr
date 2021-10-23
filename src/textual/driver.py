@@ -54,3 +54,7 @@ class Driver(ABC):
     @abstractmethod
     def stop_application_mode(self) -> None:
         ...
+
+    @abstractmethod
+    def flush_io(self) -> None:
+        ...

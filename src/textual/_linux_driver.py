@@ -140,6 +140,12 @@ class LinuxDriver(Driver):
             | termios.IGNCR
         )
 
+    def flush_io(self) -> None:
+        try:
+            termios.tcflush(self.fileno, termios.TCIOFLUSH)
+        except termios.error:
+            pass
+
     def disable_input(self) -> None:
         try:
             if not self.exit_event.is_set():
