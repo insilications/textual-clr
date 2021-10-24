@@ -145,6 +145,16 @@ class MessagePump:
         self._child_tasks.add(asyncio.get_event_loop().create_task(timer.run()))
         return timer
 
+    async def call_later_simple(self, callback: Callable[[], Awaitable[None]]) -> None:
+        """Run a callback without arguments after processing all messages and refreshing the screen.
+
+        Args:
+            callback (Callable): A callable.
+        """
+        await self.post_message(
+            events.Callback(self, partial(callback))
+        )
+
     async def call_later(self, callback: Callable, *args, **kwargs) -> None:
         """Run a callback after processing all messages and refreshing the screen.
 
