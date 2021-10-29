@@ -161,6 +161,25 @@ class App(MessagePump):
             keys, action, description, show=show, key_display=key_display
         )
 
+    async def unbind(
+        self,
+        keys: str,
+    ) -> None:
+        """Unbind keys.
+
+        Args:
+            keys (str): A comma separated list of keys, i.e.
+        """
+        self.bindings.unbind(
+            keys
+        )
+
+    async def unbind_clear(
+        self,
+    ) -> None:
+        """Unbind all keys."""
+        self.bindings.unbind_clear()
+
     @classmethod
     def run(
         cls,
