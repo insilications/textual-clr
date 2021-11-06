@@ -68,6 +68,7 @@ class Widget(MessagePump):
         self.name = name or f"{class_name}#{_count}"
 
         self._size = Size(0, 0)
+        self._resize_required = True
         self._repaint_required = False
         self._layout_required = False
         self._animate: BoundAnimator | None = None

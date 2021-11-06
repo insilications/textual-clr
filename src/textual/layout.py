@@ -143,6 +143,24 @@ class Layout(ABC):
             if widget in old_widgets and widget.size != region.size
         }
 
+        resized_data = [
+            f"RESIZED: name: {widget.name} - size.width: {widget.size.width} - size.height: {widget.size.height} -"
+            f" region.width: {region.size.width} - region.height: {region.size.height}"
+            for widget, (region, *_) in map.items()
+            if widget in old_widgets and widget.size != region.size
+        ]
+
+        #shown_data = [
+            #f"SHOWN: name: {widget.name} - size.width: {widget.size.width} - size.height: {widget.size.height}"
+            #for widget in shown_widgets
+        #]
+
+        for item in resized_data:
+            log(item)
+
+        #for item in shown_data:
+            #log(item)
+
         return ReflowResult(
             hidden=hidden_widgets, shown=shown_widgets, resized=resized_widgets
         )

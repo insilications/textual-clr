@@ -106,7 +106,7 @@ class View(Widget):
             assert isinstance(widget, Widget)
 
             display_update = self.layout.update_widget(self.console, widget)
-            # self.log("UPDATE", widget, display_update)
+            # self.log("is_root_view handle_update", widget, display_update)
             if display_update is not None:
                 self.app.display(display_update)
 
@@ -150,8 +150,10 @@ class View(Widget):
             for widget in shown:
                 widget.post_message_no_wait(events.Show(self))
 
-            send_resize = shown
-            send_resize.update(resized)
+            # send_resize = shown
+            # send_resize.update(resized)
+            send_resize = resized
+            send_resize.update({widget for widget in shown if widget._resize_required is True})
 
             for widget, region, unclipped_region in self.layout:
                 widget._update_size(unclipped_region.size)
