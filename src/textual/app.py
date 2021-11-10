@@ -227,7 +227,7 @@ class App(MessagePump):
         screen: bool = True,
         driver: Type[Driver] = None,
         **kwargs,
-    ):
+    ) -> None:
         """Run the app.
 
         Args:
