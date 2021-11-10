@@ -378,7 +378,7 @@ class App(MessagePump):
     async def remove(self, child: MessagePump) -> None:
         self.children.remove(child)
 
-    async def shutdown(self):
+    async def shutdown(self) -> None:
         driver = self._driver
         assert driver is not None
         driver.disable_input()
