@@ -341,10 +341,10 @@ class App(MessagePump):
     async def shutdown(self):
         driver = self._driver
         assert driver is not None
-        driver.flush_io()
-        log("SHUTDOWN: driver.flush_io()")
         driver.disable_input()
         await self.close_messages()
+        driver.flush_io()
+        log("SHUTDOWN: driver.flush_io()")
 
     def refresh(self, repaint: bool = True, layout: bool = False) -> None:
         sync_available = os.environ.get("TERM_PROGRAM", "") != "Apple_Terminal"
