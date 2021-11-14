@@ -246,6 +246,31 @@ class App(MessagePump):
         finally:
             loop.close()
 
+    @classmethod
+    def run_simple(
+        cls,
+        console: Console = None,
+        screen: bool = True,
+        driver: Type[Driver] = None,
+    ) -> None:
+        """Run the app.
+
+        Args:
+            console (Console, optional): Console object. Defaults to None.
+            screen (bool, optional): Enable application mode. Defaults to True.
+            driver (Type[Driver], optional): Driver class or None for default. Defaults to None.
+        """
+
+        async def run_app() -> None:
+            app = cls(console=console, screen=screen, driver_class=driver)
+            await app.process_messages()
+
+        loop = asyncio.get_event_loop()
+        try:
+            asyncio.run(run_app())
+        finally:
+            loop.close()
+
     async def push_view(self, view: ViewType) -> ViewType:
         self.register(view, self)
         self._view_stack.append(view)
