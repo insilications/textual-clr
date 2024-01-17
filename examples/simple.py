@@ -9,7 +9,10 @@ class MyApp(App):
     """An example of a very simple Textual App"""
 
     async def on_load(self, event: events.Load) -> None:
-        """Bind keys with the app loads (but before entering application mode)"""
+        """groupedby(iterable, key, keep=None, reduce=None, reducestart=None)
+        --
+
+        """
         await self.bind("b", "view.toggle('sidebar')", "Toggle sidebar")
         await self.bind("q", "quit", "Quit")
 

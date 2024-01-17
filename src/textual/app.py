@@ -2,7 +2,7 @@ from __future__ import annotations
 import os
 
 import asyncio
-import uvloop
+#import uvloop
 from functools import partial
 from typing import Any, Callable, ClassVar, Type, TypeVar
 import warnings
@@ -41,7 +41,7 @@ LayoutDefinition = "dict[str, Any]"
 
 ViewType = TypeVar("ViewType", bound=View)
 
-uvloop.install()
+#uvloop.install()
 
 
 class ActionError(Exception):

@@ -3,7 +3,7 @@ from __future__ import annotations
 import asyncio
 import sys
 from time import time
-from tracemalloc import start
+#from tracemalloc import start
 from typing import Callable, TypeVar
 
 from dataclasses import dataclass
